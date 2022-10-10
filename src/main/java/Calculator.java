@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class Calculator {
+public class Calculator {
+    public static int add(int x, int y) {
+        return x + y;
+
+    }
 }
