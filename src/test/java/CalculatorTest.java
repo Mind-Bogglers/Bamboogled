@@ -10,4 +10,10 @@ public class CalculatorTest {
         assertEquals(Calculator.add(0, 0), 0);
     }
 
+    @Test
+    public void testMultiply() {
+        assertEquals(Calculator.add(1, 2), 2);
+        assertEquals(Calculator.add(0, 0), 0);
+    }
+
 }
