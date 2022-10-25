@@ -15,4 +15,9 @@ public class CalculatorTest {
         assertEquals(Calculator.multiply(1, 2), 2);
         assertEquals(Calculator.multiply(0, 0), 0);
     }
+
+    @Test
+    public void testDivide(){
+        assertEquals(Calculator.subtract(4, 2), 2);
+    }
 }
