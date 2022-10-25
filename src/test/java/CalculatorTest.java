@@ -12,7 +12,7 @@ public class CalculatorTest {
 
     @Test
     public void testMultiply() {
-        assertEquals(Calculator.multiply(1, 2), 3);
+        assertEquals(Calculator.multiply(1, 2), 5);
         assertEquals(Calculator.multiply(0, 0), 0);
     }
 }
