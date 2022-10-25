@@ -1,3 +1,11 @@
+.*/
+out/
+*.xml
+*.log
+*.class
+*.iml
+*.name
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
