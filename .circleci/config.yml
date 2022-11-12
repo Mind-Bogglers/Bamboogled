@@ -2,12 +2,12 @@ version: 2.1
 executors:
   java17:
     docker:
-      - image: 'cimg/openjdk:17.0'
+      - image: 'cimg/openjdk:18'
 orbs:
-  maven: circleci/maven@1.3.0
+  maven: circleci/maven@1.4.0
 workflows:
   maven_test:
     jobs:
       - maven/test:
           command: '-X compile'
-          executor: java17
+          executor: java18
