@@ -1,10 +1,8 @@
 version: '2.1'
 orbs:
   maven: circleci/maven@1.4.0
+  openjdk-install: cloudesire/openjdk-install@18.0.0
 workflows:
   maven_test:
     jobs:
-        - run:
-            name: Install OpenJDK 18
-            command: sudo apt-get install openjdk-11-jdk
       - maven/test
