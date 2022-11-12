@@ -4,5 +4,4 @@ orbs:
 workflows:
   maven_test:
     jobs:
-      - maven/test:
-          executor: java18
+      - maven/test
