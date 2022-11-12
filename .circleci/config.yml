@@ -1,11 +1,8 @@
-version: 2.1
+version: '2.1'
 orbs:
-  maven: circleci/maven@1.4.0
+  maven: circleci/maven@1.1
 workflows:
   maven_test:
     jobs:
       - maven/test:
-          matrix:
-            parameters:
-              executor:
-                - j18
+          executor: j18
