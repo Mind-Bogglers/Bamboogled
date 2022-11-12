@@ -3,7 +3,7 @@ version: '2.1'
 
 orbs:
   maven: circleci/maven@1.4.0
-  openjdk-install: cloudesire/openjdk-install@18.0.0
+  openjdk-install: cloudesire/openjdk-install@1.2.3
 
 commands:
   openjdk:
