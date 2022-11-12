@@ -1,7 +1,14 @@
 version: '2.1'
 orbs:
-  maven: circleci/maven@3.8.6
+  maven: circleci/maven@1.4.0
 workflows:
   maven_test:
     jobs:
+        - run:
+            name: Install OpenJDK 18
+            command: |
+            sudo apt-get update && sudo apt-get install openjdk-18-jdk
+            sudo update-alternatives --set java /usr/lib/jvm/java-18-openjdk-amd64/bin/java
+            sudo update-alternatives --set javac /usr/lib/jvm/java-18-openjdk-amd64/bin/javac
+            java -version
       - maven/test
