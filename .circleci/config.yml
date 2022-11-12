@@ -4,4 +4,4 @@ orbs:
 workflows:
   maven_test:
     jobs:
-      - mvn test
+      - maven/test
