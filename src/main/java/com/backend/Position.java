@@ -1,5 +1,7 @@
 package com.backend;
 
+import java.util.Objects;
+
 /**
  * Class to hold Position information associated with a BoggleGrid
  */
@@ -38,6 +40,24 @@ public class Position {
      */
     public void setRow(int row) { this.row = row; }
     public void setCol(int col) { this.col = col; }
-    public int getRow(int row) { return this.row; }
-    public int getCol(int col) { return this.col; }
+    public int getRow() { return this.row; }
+    public int getCol() { return this.col; }
+
+    @Override
+    public String toString() {
+        return "(" + this.row + ", " + this.col + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return row == position.row && col == position.col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col);
+    }
 }

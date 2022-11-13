@@ -1,6 +1,10 @@
 package com.backend.dice;
 
 public class BoardLetterGeneratorBig extends BoardLetterGenerator{
+
+    /**
+     * Constructor for the BoardLetterGeneratorBig class. The dice used to generate the letters are already set.
+     */
     public BoardLetterGeneratorBig() {
         super(new Die[]{
                 new Die("AAAFRS"),

@@ -261,7 +261,7 @@ public class BoggleGame {
             ArrayList<Position> path = new ArrayList<>();
             path.addAll(visited);
             path.add(p);
-            String pathWord = currentWord + Character.toLowerCase(boggleGrid.getCharAt(p.getRow(0), p.getCol(0)));
+            String pathWord = currentWord + Character.toLowerCase(boggleGrid.getCharAt(p.getRow(), p.getCol()));
             allWords(pathWord, path, boggleDict, allWords, boggleGrid);
         }
 
@@ -269,8 +269,8 @@ public class BoggleGame {
 
 
     public ArrayList<Position> findNextPositions(ArrayList<Position> visited, BoggleGrid boggleGrid) {
-        int rowAt = visited.get(visited.size() - 1).getRow(0);
-        int colAt = visited.get(visited.size() - 1).getCol(0);
+        int rowAt = visited.get(visited.size() - 1).getRow();
+        int colAt = visited.get(visited.size() - 1).getCol();
         ArrayList<Position> ans = new ArrayList<>();
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -279,7 +279,7 @@ public class BoggleGame {
                 }
                 boolean seenBefore = false;
                 for (Position p: visited) {
-                    if (p.getRow(0) == rowAt + i && p.getCol(0) == colAt + j) {
+                    if (p.getRow() == rowAt + i && p.getCol() == colAt + j) {
                         seenBefore = true;
                         break;
                     }

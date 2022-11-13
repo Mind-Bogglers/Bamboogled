@@ -4,12 +4,22 @@ import java.util.HashSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class BoardLetterGenerator {
-    private Die[] dice;
+    // This class is used to generate a string of random letters, which is used for the board.
 
+    private Die[] dice; // The dice used to generate the letters.
+
+    /**
+     * Constructor for the BoardLetterGenerator class.
+     * @param dice The dice used to generate the letters.
+     */
     BoardLetterGenerator(Die[] dice) {
         this.dice = dice;
     }
 
+    /**
+     * Generates a string of random letters, which is used for the board.
+     * @return A string of random letters.
+     */
     public String generateString() {
         int randomIndex;
         String ans = "";
