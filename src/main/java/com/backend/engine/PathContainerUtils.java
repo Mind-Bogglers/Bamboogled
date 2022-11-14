@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class PathContainerUtils {
 
-
     /**
      * Given a list of paths, and a new letter, returns a new list of all the paths that can be made by adding the new
      * letter to the end of the paths (if possible).

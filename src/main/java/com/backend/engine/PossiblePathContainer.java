@@ -20,6 +20,9 @@ public class PossiblePathContainer {
     }
 
     public List<Path> getPaths() {
+        if (this.paths == null) {
+            return new ArrayList<>();
+        }
         return this.paths;
     }
 }
