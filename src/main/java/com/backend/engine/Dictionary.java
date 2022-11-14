@@ -1,10 +1,9 @@
-package com.backend;
+package com.backend.engine;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.TreeSet;
 
@@ -54,7 +53,7 @@ public class Dictionary {
      * @return  A boolean indicating if the word has been found
      */
     public boolean containsWord(String word) {
-        return this.legalWords.contains(word.toLowerCase());
+        return this.legalWords.contains(word);
     }
 
     /* 
@@ -67,7 +66,6 @@ public class Dictionary {
         if (Objects.equals(str, "")) {
             return true;
         }
-        str = str.toLowerCase();
         char lastCharacterIncremented = (char) (str.charAt(str.length() - 1) + 1);
         String upperBoundForSubSet = str.substring(0, str.length() - 1) + lastCharacterIncremented;
         return this.legalWords.subSet(str, upperBoundForSubSet).size() > 0;

@@ -1,13 +1,11 @@
 package com.backend.engine;
 
-import com.backend.BoggleGrid;
-import com.backend.Position;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A utility class for the PossiblePathContainer and Path classes.
+ * @author Hassan El-Sheikha
  */
 public class PathContainerUtils {
 
@@ -17,8 +15,10 @@ public class PathContainerUtils {
      * @param existingContainer The list of paths to add to.
      * @param boggleGrid The boggle grid to use.
      * @param latestKey The new letter to add to the paths.
+     * @return A new list of paths that can be made by adding the new letter to the end of the paths (if possible).
+     * @throws NoPathException If no paths can be made by adding the new letter to the end of the paths.
      */
-    public static PossiblePathContainer fetchContainer(PossiblePathContainer existingContainer, BoggleGrid boggleGrid, char latestKey) {
+    public static PossiblePathContainer fetchContainer(PossiblePathContainer existingContainer, BoggleGrid boggleGrid, char latestKey) throws NoPathException {
         PossiblePathContainer newContainer = new PossiblePathContainer();
         if (existingContainer == null) {
             initFirstLetterContainer(newContainer, boggleGrid, latestKey);
@@ -28,6 +28,10 @@ public class PathContainerUtils {
                     newContainer.addPath(newPath);
                 }
             }
+        }
+        if (newContainer.getPaths().size() == 0) {
+            throw new NoPathException();
+
         }
         return newContainer;
     }
