@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.stats;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -150,6 +150,18 @@ public class BoggleStats {
         System.out.println("YOU FOUND AN AVERAGE OF " + pAverageWords + " WORDS EVERY ROUND.");
         System.out.println("I FOUND AN AVERAGE OF " + cAverageWords + " WORDS EVERY ROUND.");
         System.out.println("GOOD GAME! IT WAS NICE PLAYING WITH YOU!");
+    }
+
+    public void clearStats() {
+        this.playerWords = new HashSet<String>();
+        this.computerWords = new HashSet<String>();
+        this.pScore = 0;
+        this.cScore = 0;
+        this.pScoreTotal = 0;
+        this.cScoreTotal = 0;
+        this.pAverageWords = 0;
+        this.cAverageWords = 0;
+        this.round = 0;
     }
 
     /* 

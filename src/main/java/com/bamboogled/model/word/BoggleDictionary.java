@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.word;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.TreeSet;
  * The Dictionary class for the first Assignment in CSC207, Fall 2022
  * The Dictionary will contain lists of words that are acceptable for Boggle 
  */
-public class Dictionary {
+public class BoggleDictionary {
 
     /**
      * set of legal words for Boggle
@@ -23,7 +23,7 @@ public class Dictionary {
      * 
      * @param filename the file containing a list of legal words.
      */
-    public Dictionary(String filename) {
+    public BoggleDictionary(String filename) {
         String line = "";
         int wordcount = 0;
         this.legalWords = new TreeSet<String>();

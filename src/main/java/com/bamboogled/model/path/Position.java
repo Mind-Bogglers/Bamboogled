@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.path;
 
 import java.util.Objects;
 

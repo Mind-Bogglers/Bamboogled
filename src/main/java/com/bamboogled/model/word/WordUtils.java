@@ -1,4 +1,7 @@
-package com.backend.engine;
+package com.bamboogled.model.word;
+
+import com.bamboogled.model.grid.BoggleGrid;
+import com.bamboogled.model.path.Position;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +16,7 @@ public class WordUtils {
      * @param boggleGrid BoggleGrid
      * @return Set of words
      */
-    public static Set<String> findAllWords(Dictionary boggleDict, BoggleGrid boggleGrid) {
+    public static Set<String> findAllWords(BoggleDictionary boggleDict, BoggleGrid boggleGrid) {
         HashSet<String> allWords = new HashSet<>();
         for (int i = 0; i < boggleGrid.numRows(); i++) {
             for (int j = 0; j < boggleGrid.numCols(); j++) {
@@ -26,7 +29,7 @@ public class WordUtils {
         return allWords;
     }
 
-    private static void allWords(String currentWord, ArrayList<Position> visited, Dictionary boggleDict, HashSet<String> allWords, BoggleGrid boggleGrid) {
+    private static void allWords(String currentWord, ArrayList<Position> visited, BoggleDictionary boggleDict, HashSet<String> allWords, BoggleGrid boggleGrid) {
         if (boggleDict.containsWord(currentWord)) {
             if (currentWord.length() >= 4) {
                 allWords.add(currentWord);

@@ -1,6 +1,6 @@
-import com.backend.dice.BoardLetterGeneratorBig;
-import com.backend.dice.BoardLetterGeneratorSmall;
-import com.backend.dice.Die;
+import com.bamboogled.model.dice.BoardLetterGeneratorBig;
+import com.bamboogled.model.dice.BoardLetterGeneratorSmall;
+import com.bamboogled.model.dice.Die;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

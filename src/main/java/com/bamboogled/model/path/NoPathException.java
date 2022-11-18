@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.path;
 
 /**
  * Exception thrown when there is no path for a certain word.

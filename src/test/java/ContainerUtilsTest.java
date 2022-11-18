@@ -1,7 +1,7 @@
-import com.backend.engine.BoggleGrid;
-import com.backend.engine.NoPathException;
-import com.backend.engine.PathContainerUtils;
-import com.backend.engine.PossiblePathContainer;
+import com.bamboogled.model.grid.BoggleGrid;
+import com.bamboogled.model.path.NoPathException;
+import com.bamboogled.model.path.PathContainerUtils;
+import com.bamboogled.model.path.PossiblePathContainer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.grid;
 
 /**
  * The BoggleGrid class for the first Assignment in CSC207, Fall 2022

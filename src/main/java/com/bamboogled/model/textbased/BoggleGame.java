@@ -1,12 +1,16 @@
-package com.backend.textbased;
+package com.bamboogled.model.textbased;
 
 
-import com.backend.engine.BoggleStats;
-import com.backend.dice.BoardLetterGenerator;
-import com.backend.dice.BoardLetterGeneratorBig;
-import com.backend.dice.BoardLetterGeneratorSmall;
-import com.backend.engine.*;
-import com.backend.engine.Dictionary;
+import com.bamboogled.model.grid.BoggleGrid;
+import com.bamboogled.model.stats.BoggleStats;
+import com.bamboogled.model.dice.BoardLetterGenerator;
+import com.bamboogled.model.dice.BoardLetterGeneratorBig;
+import com.bamboogled.model.dice.BoardLetterGeneratorSmall;
+import com.bamboogled.model.word.BoggleDictionary;
+import com.bamboogled.model.path.NoPathException;
+import com.bamboogled.model.path.PathContainerUtils;
+import com.bamboogled.model.path.PossiblePathContainer;
+import com.bamboogled.model.word.WordUtils;
 
 import java.util.*;
 
@@ -132,7 +136,7 @@ public class BoggleGame {
         BoggleGrid grid = new BoggleGrid(size);
         grid.initalizeBoard(letters);
         //step 2. initialize the dictionary of legal words
-        com.backend.engine.Dictionary boggleDict = new Dictionary("src/main/java/com/backend/wordlist2.txt"); //you may have to change the path to the wordlist, depending on where you place it.
+        BoggleDictionary boggleDict = new BoggleDictionary("src/main/java/com/backend/wordlist2.txt"); //you may have to change the path to the wordlist, depending on where you place it.
         //step 3. find all legal words on the board, given the dictionary and grid arrangement.
         long theTime1 = System.nanoTime();
         double timeInSeconds1 = (double) theTime1 / 1_000_000_000;

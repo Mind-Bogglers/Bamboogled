@@ -1,4 +1,4 @@
-package com.backend.dice;
+package com.bamboogled.model.dice;
 
 import java.util.concurrent.ThreadLocalRandom;
 

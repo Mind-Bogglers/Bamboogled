@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Path {
      * Checks if the path contains a certain position.
      * @return true if the position is contained in the path, false otherwise
      */
-    public boolean containsPosition(int row, int col) {
+    public boolean contains(int row, int col) {
         boolean seenBefore = false;
         for (Position p : this.positions) {
             if (p.getRow() == row && p.getCol() == col) {

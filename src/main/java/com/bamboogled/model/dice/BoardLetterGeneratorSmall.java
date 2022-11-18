@@ -1,4 +1,4 @@
-package com.backend.dice;
+package com.bamboogled.model.dice;
 
 public class BoardLetterGeneratorSmall extends BoardLetterGenerator {
 

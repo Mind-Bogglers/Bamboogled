@@ -1,4 +1,4 @@
-package com.backend.engine;
+package com.bamboogled.model.path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ public class PossiblePathContainer {
     public void addPath(Path path) {
         this.paths.add(path);
     }
+
 
     /**
      * Returns all paths in the container.

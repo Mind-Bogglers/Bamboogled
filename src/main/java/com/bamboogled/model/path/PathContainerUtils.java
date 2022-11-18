@@ -1,4 +1,6 @@
-package com.backend.engine;
+package com.bamboogled.model.path;
+
+import com.bamboogled.model.grid.BoggleGrid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,7 @@ public class PathContainerUtils {
                     continue;
                 }
                 if (boggleGrid.getCharAt(rowAt + i, colAt + j) == latestKey) {
-                    if (!existingPath.containsPosition(rowAt + i, colAt + j)) {
+                    if (!existingPath.contains(rowAt + i, colAt + j)) {
                         ans.add(new Path(existingPath, new Position(rowAt + i, colAt + j)));
                     }
                 }
