@@ -8,14 +8,14 @@ import com.bamboogled.model.player.Player;
 import java.util.List;
 
 public interface IBoggleModel {
-    public void newGame(int dimensionsOfGrid, List<Player> players) throws IllegalArgumentException;
-    public void startGameForNextPlayer() throws NoMorePlayersException, GameAlreadyInProgressException, PlayerAlreadyPlayedException;
-    public void startGame(Player player) throws GameAlreadyInProgressException, PlayerAlreadyPlayedException;
-    public void endGame();
-    public void addLetterToCurrentWord(char letter) throws NoPathException;
-    public boolean submitCurrentWord();
-    public Path getPathToWord() throws EmptyWordException;
-    public BoggleGrid getCurrentGrid();
-    public Player getCurrentPlayer();
-    public String getCurrentWord();
+    void newGame(int dimensionsOfGrid, List<Player> players) throws IllegalArgumentException;
+    void startGameForNextPlayer() throws NoMorePlayersException, GameAlreadyInProgressException, PlayerAlreadyPlayedException;
+    void startGame(Player player) throws GameAlreadyInProgressException, PlayerAlreadyPlayedException;
+    void endGame() throws GameNotInProgressException;
+    void addLetterToCurrentWord(char letter) throws NoPathException;
+    boolean submitCurrentWord();
+    Path getPathToWord() throws EmptyWordException;
+    BoggleGrid getCurrentGrid();
+    Player getCurrentPlayer();
+    String getCurrentWord();
 }

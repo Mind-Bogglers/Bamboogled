@@ -104,7 +104,11 @@ public class TextBasedView {
                         }
                         if (choice.equals("2")) {
                             System.out.println("Good game!. Your score was " + currentPlayer.getScore());
-                            model.endGame();
+                            try {
+                                model.endGame();
+                            } catch (GameNotInProgressException e) {
+                                throw new RuntimeException(e);
+                            }
                             break;
                         }
                     }
