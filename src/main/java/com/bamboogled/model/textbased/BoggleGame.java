@@ -7,7 +7,7 @@ import com.bamboogled.model.dice.BoardLetterGenerator;
 import com.bamboogled.model.dice.BoardLetterGeneratorBig;
 import com.bamboogled.model.dice.BoardLetterGeneratorSmall;
 import com.bamboogled.model.word.BoggleDictionary;
-import com.bamboogled.model.path.NoPathException;
+import com.bamboogled.exceptions.NoPathException;
 import com.bamboogled.model.path.PathContainerUtils;
 import com.bamboogled.model.path.PossiblePathContainer;
 import com.bamboogled.model.word.WordUtils;

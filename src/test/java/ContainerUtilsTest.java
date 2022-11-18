@@ -1,5 +1,5 @@
 import com.bamboogled.model.grid.BoggleGrid;
-import com.bamboogled.model.path.NoPathException;
+import com.bamboogled.exceptions.NoPathException;
 import com.bamboogled.model.path.PathContainerUtils;
 import com.bamboogled.model.path.PossiblePathContainer;
 import org.junit.jupiter.api.Test;

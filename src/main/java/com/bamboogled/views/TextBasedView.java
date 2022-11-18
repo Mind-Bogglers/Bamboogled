@@ -1,14 +1,13 @@
 package com.bamboogled.views;
 
-import com.bamboogled.exceptions.NoMorePlayersException;
+import com.bamboogled.exceptions.*;
 import com.bamboogled.model.grid.BoggleGrid;
 import com.bamboogled.model.model.BoggleModel;
-import com.bamboogled.model.path.NoPathException;
 import com.bamboogled.model.path.Path;
-import com.bamboogled.model.path.PathContainerUtils;
 import com.bamboogled.model.player.Player;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class TextBasedView {
@@ -32,7 +31,7 @@ public class TextBasedView {
             System.out.println("Enter 1 to play on a big (5x5) grid; 2 to play on a small (4x4) one:");
             String choiceGrid = scanner.nextLine();
             //get grid size preference
-            if (choiceGrid == "") break; //end game if user inputs nothing
+            if (Objects.equals(choiceGrid, "")) break; //end game if user inputs nothing
             while (!choiceGrid.equals("1") && !choiceGrid.equals("2")) {
                 System.out.println("Please try again.");
                 System.out.println("Enter 1 to play on a big (5x5) grid; 2 to play on a small (4x4) one:");
@@ -56,24 +55,36 @@ public class TextBasedView {
             while (true) {
                 try {
                     model.startGameForNextPlayer();
-                    Player currentPlayer = model.getCurrentPlayer();
-                    Path currentPath;
+                } catch (NoMorePlayersException e) {
+                    System.out.println("Game over!");
+                    break;
+                } catch (GameAlreadyInProgressException | PlayerAlreadyPlayedException e) {
+                    throw new RuntimeException(e);
+                }
+                Player currentPlayer = model.getCurrentPlayer();
                     System.out.println("It is " + currentPlayer.getName() + "'s turn.");
                     System.out.println("The board is:");
                     System.out.println(model.getCurrentGrid().toString());
                     System.out.println("For every letter of the word you want to enter, enter it and press enter. When you are done, press enter again.");
-                    String letter = scanner.nextLine();
+                    String letter = "*"; //random placeholder
                     while (true) {
-                        while (!letter.equals("")) {
+                        while (true) {
+                            letter = scanner.nextLine();
+                            if (letter.equals("")) break;
                             try {
                                 model.addLetterToCurrentWord(letter.charAt(0));
                             } catch (NoPathException e) {
                                 System.out.println("No path exists for the current word. Please try again.");
+                                continue;
                             }
                             System.out.println("The current word is: " + model.getCurrentWord());
                             System.out.println("The board is:");
-                            printBoardWithPath(model.getCurrentGrid(), model.getPathToWord());
-                            letter = scanner.nextLine();
+                            try {
+                                printBoardWithPath(model.getCurrentGrid(), model.getPathToWord());
+                            } catch (EmptyWordException e) {
+                                throw new RuntimeException(e);
+                            }
+
                         }
                         if (model.submitCurrentWord()) {
                             System.out.println("You got a word!");
@@ -92,7 +103,7 @@ public class TextBasedView {
                             choice = scanner.nextLine();
                         }
                         if (choice.equals("2")) {
-                            System.out.println("Good game!. Your score is " + currentPlayer.getScore());
+                            System.out.println("Good game!. Your score was " + currentPlayer.getScore());
                             model.endGame();
                             break;
                         }
@@ -100,10 +111,6 @@ public class TextBasedView {
 
 
 
-
-                } catch (NoMorePlayersException e) {
-                    break;
-                }
             }
 
 
@@ -114,9 +121,9 @@ public class TextBasedView {
         for (int i = 0; i < grid.numRows(); i++) {
             for (int j = 0; j < grid.numCols(); j++) {
                 if (path.contains(i, j)) {
-                    System.out.print(Character.toLowerCase(grid.getCharAt(i, j)) + " ");
+                    System.out.print("[" + grid.getCharAt(i, j) + "]" + "\t");
                 } else {
-                    System.out.print(grid.getCharAt(i, j) + " ");
+                    System.out.print(grid.getCharAt(i, j) + "\t");
                 }
             }
             System.out.println();

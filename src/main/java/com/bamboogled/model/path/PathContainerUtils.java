@@ -1,5 +1,6 @@
 package com.bamboogled.model.path;
 
+import com.bamboogled.exceptions.NoPathException;
 import com.bamboogled.model.grid.BoggleGrid;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class PathContainerUtils {
             }
         }
         if (newContainer.getPaths().size() == 0) {
-            throw new NoPathException();
+            throw new NoPathException("There is no path for the current word.");
 
         }
         return newContainer;

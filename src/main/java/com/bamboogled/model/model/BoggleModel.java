@@ -1,11 +1,10 @@
 package com.bamboogled.model.model;
 
-import com.bamboogled.exceptions.NoMorePlayersException;
+import com.bamboogled.exceptions.*;
 import com.bamboogled.model.grid.BoggleGrid;
 import com.bamboogled.model.player.Player;
 import com.bamboogled.model.dice.BoardLetterGeneratorBig;
 import com.bamboogled.model.dice.BoardLetterGeneratorSmall;
-import com.bamboogled.model.path.NoPathException;
 import com.bamboogled.model.path.Path;
 import com.bamboogled.model.path.PathContainerUtils;
 import com.bamboogled.model.path.PossiblePathContainer;
@@ -49,7 +48,7 @@ public class BoggleModel implements IBoggleModel {
      * Given the players participating in the game and the size of the grid, creates a new game.
      * @param dimensionsOfGrid The side length of the grid.
      * @param players The players in the game, without duplicate players.
-     * @throws IllegalArgumentException If the dimensionsOfGrid is not 4 or 5.
+     * @throws IllegalArgumentException If the dimensionsOfGrid is not 4 or 5, or if the player list is empty.
      */
     @Override
     public void newGame(int dimensionsOfGrid, List<Player> players) throws IllegalArgumentException{
@@ -77,7 +76,7 @@ public class BoggleModel implements IBoggleModel {
         this.currentPlayerIndex = 0;
     }
 
-    public void startGameForNextPlayer() throws NoMorePlayersException {
+    public void startGameForNextPlayer() throws NoMorePlayersException, GameAlreadyInProgressException, PlayerAlreadyPlayedException {
         if (this.currentPlayerIndex >= this.players.size()) {
             throw new NoMorePlayersException("No more players to start game for");
         }
@@ -87,12 +86,12 @@ public class BoggleModel implements IBoggleModel {
     }
 
     @Override
-    public void startGame(Player player) throws IllegalArgumentException {
+    public void startGame(Player player) throws GameAlreadyInProgressException, PlayerAlreadyPlayedException {
         if (this.currentPlayer != null) {
-            throw new IllegalStateException("Game already started for another player");
+            throw new GameAlreadyInProgressException("Game already started for another player");
         }
         if (player.hasPlayed()) {
-            throw new IllegalStateException("Player has already played");
+            throw new PlayerAlreadyPlayedException("Player has already played");
         }
         this.currentPlayer = player;
         this.currentWord = ""; //wipe the previous player's word, if any.
@@ -113,8 +112,8 @@ public class BoggleModel implements IBoggleModel {
      */
     @Override
     public void addLetterToCurrentWord(char letter) throws NoPathException {
-        this.currentWord += Character.toUpperCase(letter);
         this.possiblePaths = PathContainerUtils.fetchContainer(this.possiblePaths, this.currentGrid, Character.toUpperCase(letter));
+        this.currentWord += Character.toUpperCase(letter);
     }
 
     /**
@@ -139,12 +138,12 @@ public class BoggleModel implements IBoggleModel {
     /**
      * Returns a possible path to the current word.
      * @return a possible path to the current word.
-     * @throws IllegalStateException If there is no current word.
+     * @throws EmptyWordException there is no current word.
      */
     @Override
-    public Path getPathToWord() throws IllegalStateException {
+    public Path getPathToWord() throws EmptyWordException {
         if (this.possiblePaths == null) {
-            throw new IllegalStateException("There is no current word to find a path to. Add at least one letter to the current word.");
+            throw new EmptyWordException("There is no current word to find a path to. Add at least one letter to the current word.");
         }
         return possiblePaths.getPaths().get(0);
     }
