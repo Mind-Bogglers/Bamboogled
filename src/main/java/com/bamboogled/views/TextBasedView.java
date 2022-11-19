@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * A text-based view for the Boggle game. This view features a multiplayer mode, and character-by-character word input.
+ */
 public class TextBasedView {
     private BoggleModel model;
     private Scanner scanner;
