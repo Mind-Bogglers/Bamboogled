@@ -32,6 +32,9 @@ public class BoggleModel implements IBoggleModel {
     private List<Player> players;
     private Player currentPlayer;
     private int currentPlayerIndex;
+    public final int GREEN = 0;
+    public final int GRAY = 1;
+    public final int RED = 2;
 
 
     /**
@@ -58,6 +61,7 @@ public class BoggleModel implements IBoggleModel {
      */
     @Override
     public void newGame(int dimensionsOfGrid, List<Player> players) throws IllegalArgumentException{
+        this.currentWord = "";
         this.possiblePaths = null;
         if (dimensionsOfGrid == 4) {
             this.currentGrid = this.smallBoggleGrid;
@@ -78,6 +82,7 @@ public class BoggleModel implements IBoggleModel {
         for (Player player : this.players) {
             player.resetScore();
             player.clearFoundWords();
+            player.setPlayed(false);
         }
         this.currentPlayerIndex = 0;
     }
@@ -142,21 +147,47 @@ public class BoggleModel implements IBoggleModel {
     }
 
     /**
-     * Check if the current word is a valid word, and if so, add it to the human's valid words. If not, do not add it.
+     * Check if the current word is a valid word, and if so, add it to the current player's valid words. If not, do not
+     * add it.
      * In either case, the current word and possible paths are reset.
      * @return If the current word is a valid word or not.
      */
     @Override
     public boolean submitCurrentWord() {
         if (this.allWordsOnGrid.contains(this.currentWord)) {
-            this.currentPlayer.addWord(this.currentWord);
+            if (!this.currentPlayer.getFoundWords().contains(this.currentWord)) {
+                this.currentPlayer.addWord(this.currentWord);
+                this.currentWord = "";
+                this.possiblePaths = null;
+                return true;
+            }
+        }
+        this.currentWord = "";
+        this.possiblePaths = null;
+        return false;
+    }
+
+    /**
+     * Check if the current word is a valid word, and if so, add it to the current player's valid words. If not, do not
+     * add it.
+     * @return GREEN if the word is accepted, GRAY if the word is valid but has already been guessed before, or RED if
+     * the word is invalid.
+     */
+    public int submitCurrentWordColored() {
+        if (this.allWordsOnGrid.contains(this.currentWord)) {
+            if (!this.currentPlayer.getFoundWords().contains(this.currentWord)) {
+                this.currentPlayer.addWord(this.currentWord);
+                this.currentWord = "";
+                this.possiblePaths = null;
+                return this.GREEN;
+            }
             this.currentWord = "";
             this.possiblePaths = null;
-            return true;
+            return this.GRAY;
         } else {
             this.currentWord = "";
             this.possiblePaths = null;
-            return false;
+            return this.RED;
         }
     }
 
