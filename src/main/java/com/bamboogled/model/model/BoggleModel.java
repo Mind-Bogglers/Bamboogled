@@ -14,6 +14,11 @@ import com.bamboogled.model.word.WordUtils;
 import java.util.List;
 import java.util.Set;
 
+
+/**
+ * Represents a Boggle Model for the Boggle game.
+ * @author Hassan El-Sheikha
+ */
 public class BoggleModel implements IBoggleModel {
     private final BoardLetterGeneratorSmall smallWordGenerator;
     private final BoardLetterGeneratorBig bigWordGenerator;
@@ -49,6 +54,7 @@ public class BoggleModel implements IBoggleModel {
      * @param dimensionsOfGrid The side length of the grid.
      * @param players The players in the game, without duplicate players.
      * @throws IllegalArgumentException If the dimensionsOfGrid is not 4 or 5, or if the player list is empty.
+     * @WARNING Mutates all players in the player list to reset their found words and scores.
      */
     @Override
     public void newGame(int dimensionsOfGrid, List<Player> players) throws IllegalArgumentException{
@@ -76,6 +82,13 @@ public class BoggleModel implements IBoggleModel {
         this.currentPlayerIndex = 0;
     }
 
+    /**
+     * Starts the game for the next player in the list of players.
+     * @throws NoMorePlayersException If there are no more players to play.
+     * @throws GameAlreadyInProgressException If the game is already in progress for another player.
+     * @throws PlayerAlreadyPlayedException If the current player has already played this game.
+     * @precondition There is no current player playing the game.
+     */
     public void startGameForNextPlayer() throws NoMorePlayersException, GameAlreadyInProgressException, PlayerAlreadyPlayedException {
         if (this.currentPlayerIndex >= this.players.size()) {
             throw new NoMorePlayersException("No more players to start game for");
@@ -85,8 +98,13 @@ public class BoggleModel implements IBoggleModel {
         startGame(toPlay);
     }
 
-    @Override
-    public void startGame(Player player) throws GameAlreadyInProgressException, PlayerAlreadyPlayedException {
+    /**
+     * Starts the game for the given player.
+     * @param player The player to start the game for.
+     * @throws GameAlreadyInProgressException If the game is already in progress for another player.
+     * @throws PlayerAlreadyPlayedException If the current player has already played this game.
+     */
+    private void startGame(Player player) throws GameAlreadyInProgressException, PlayerAlreadyPlayedException {
         if (this.currentPlayer != null) {
             throw new GameAlreadyInProgressException("Game already started for another player");
         }
@@ -98,8 +116,15 @@ public class BoggleModel implements IBoggleModel {
         this.possiblePaths = null;
     }
 
+    /**
+     * Ends the game for the current player.
+     * @throws GameNotInProgressException If the game is not in progress.
+     */
     @Override
-    public void endGame() {
+    public void endGame() throws GameNotInProgressException {
+        if (this.currentPlayer == null) {
+            throw new GameNotInProgressException("There is no player currently playing to end the game for.");
+        }
         this.currentPlayer.setPlayed(true);
         this.currentPlayer.clearFoundWords();
         this.currentPlayer = null;
@@ -157,12 +182,40 @@ public class BoggleModel implements IBoggleModel {
         return this.currentGrid;
     }
 
+    /**
+     * Returns the current player playing the game.
+     * @return the current player playing the game.
+     */
+    @Override
     public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
 
+    /**
+     * Returns all players playing this game.
+     * @return all players playing this game.
+     */
+    @Override
+    public List<Player> getPlayers() {
+        return this.players;
+    }
+
+    /**
+     * Returns the current word.
+     * @return the current word.
+     */
+    @Override
     public String getCurrentWord() {
         return this.currentWord;
+    }
+
+    /**
+     * Returns all the words that can be found on the grid corresponding to the current game.
+     * @return all the words that can be found on the grid corresponding to the current game
+     */
+    @Override
+    public Set<String> getAllWordsOnGrid() {
+        return this.allWordsOnGrid;
     }
 
 }
