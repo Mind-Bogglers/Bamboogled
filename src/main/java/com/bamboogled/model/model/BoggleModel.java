@@ -167,7 +167,12 @@ public class BoggleModel implements IBoggleModel {
         return false;
     }
 
-    
+    /**
+     * Check if the current word is a valid word, and if so, add it to the current player's valid words. If not, do not
+     * add it.
+     * @return GREEN if the word is accepted, GRAY if the word is valid but has already been guessed before, or RED if
+     * the word is invalid.
+     */
     public int submitCurrentWordColored() {
         if (this.allWordsOnGrid.contains(this.currentWord)) {
             if (!this.currentPlayer.getFoundWords().contains(this.currentWord)) {
